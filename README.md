@@ -1,5 +1,17 @@
 # ROS on docker
 
+## for buger 
+①ディレクトリ作成
+作業ディレクトリ内にcatkin_ws/src/とフォルダを作り、ROSのコードをsrcの下におく
+作業ディレクトリ直下に、このdocker-rosをクローン（catkin_wsディレクトリと並ぶように）
+
+②イメージのビルド  
+```bash
+$ cd /docker-ros
+$ docker build --tag ros:buger --file Dockerfile.kinetic.standard .
+```
+③
+
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/shinsumicco/ros.svg)](https://hub.docker.com/r/shinsumicco/ros)
 
 ## Overview
