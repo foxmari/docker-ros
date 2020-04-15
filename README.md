@@ -10,7 +10,36 @@
 $ cd /docker-ros
 $ docker build --tag ros:buger --file Dockerfile.kinetic.standard .
 ```
-③
+③Dockerネットワークを設定
+```bash
+docker network create rosnet
+```
+④ROSCORE起動+最初のセットアップ
+```bash
+$ ./run.kinetic.standard --name roscore --net rosnet
+# コンテナに入る
+$ cd ~/catkin_ws/src/burger_war/docker
+$ bash  docker_setup.bash
+$ roscore
+```
+ここで、ROS_MASTER_URIのURLをメモ。
+
+⑤ガゼボ用のコンテナの起動
+```bash
+$ ./run.kinetic.standard --name gazebo --net rosnet --env ROS_HOSTNAME=gazebo --env ROS_MASTER_URI=http://830b252d7d03:11311(この部分はメモしたURL)/
+# コンテナに入る
+# gazeboの起動
+$ bash scripts/sim_with_judge.sh
+```
+
+⑥ROSのコードを動かす
+```bash
+$ docker exec -it gazebo bash
+# コンテナに入る
+# ランチファイル実行
+$ roslaunch burger_war sim_level_1_cheese.launch
+```
+
 
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/shinsumicco/ros.svg)](https://hub.docker.com/r/shinsumicco/ros)
 
