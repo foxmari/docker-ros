@@ -30,10 +30,16 @@ RUN apt-get update && \
  ros-kinetic-turtlebot3-simulations \
  python-pip \
  ros-kinetic-aruco-ros \
- gnome-terminal
+ gnome-terminal \
+ wget
 
 RUN pip install requests flask
 
+# install new version gazebo
+RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+RUN apt-get update
+RUN apt-get install gazebo7 -y
 
 
 # setup entrypoint
