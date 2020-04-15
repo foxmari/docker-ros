@@ -23,9 +23,23 @@ RUN set -x && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/
 
+## for burger war
+RUN apt-get update && \
+ apt-get install -y ros-kinetic-turtlebot3 \
+ ros-kinetic-turtlebot3-msgs \
+ ros-kinetic-turtlebot3-simulations \
+ python-pip \
+ ros-kinetic-aruco-ros \
+ gnome-terminal
+
+RUN pip install requests flask
+
+
+
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 RUN chmod 777 /ros_entrypoint.sh
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["/bin/bash"]
+
